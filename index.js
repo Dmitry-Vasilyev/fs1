@@ -11,14 +11,12 @@ const trashDir = path.resolve(__dirname, 'trash');
 })();
 
 
-
-
 async function createNote(name, content) {
 
     const notePath = path.join(noteDir, `${name}.txt`);
     let hasNote = false;
 
-    fs.readdir(noteDir, (err, files) => {
+    await fs.readdir(noteDir, (err, files) => {
         files.forEach((file) => {
             if(file.split('.')[0] === name) {
                 console.log('ОШИБКА')
@@ -30,7 +28,7 @@ async function createNote(name, content) {
 
     if(hasNote) return;
 
-    fs.writeFile(
+    await fs.writeFile(
         notePath,
         content,
         (err) => {
